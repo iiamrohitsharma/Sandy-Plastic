@@ -1,0 +1,88 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .sidebar {
+        width: 200px;
+        background-color: #f1f1f1;
+        position: fixed;
+        overflow: auto;
+    }
+
+        .sidebar a {
+            display: block;
+            color: black;
+            padding: 1em;
+            text-decoration: none;
+        }
+
+            .sidebar a.active {
+                background-color: #1b6ec2;
+                color: white;
+            }
+
+            .sidebar a:hover:not(.active) {
+                background-color: #d2e6f9;
+                color: black;
+            }
+
+    div.content {
+        margin-left: 200px;
+        padding: 1px 16px;
+    }
+
+</style>
+
+@section AdminMenu {
+     <div class="card sidebar menu">
+        <a class="adminMenu active">User Management</a>
+        <a class="adminMenu">Role Management</a>
+            <a class="adminMenu" asp-area="Admin"
+            asp-controller="CompanyProfileManagement" asp-action="Index">Company Profile</a>
+        <a class="adminMenu">About</a>
+    </div>
+}
+
+    <div class="content">
+    @if (IsSectionDefined("AdminMenu"))
+    {
+        IgnoreSection("AdminMenu");
+    }
+    @if (IsSectionDefined("Scripts"))
+    {
+        IgnoreSection("Scripts");
+    }
+    <h4>@ViewData["SubHeading"]</h4>
+    <hr />
+    @RenderBody()
+</div>
+
+
+
+@section Scripts
+    {
+    <script>
+        $(document).ready(() => {
+            console.log('hello from admin layout')
+            $(".adminMenu").click(function () {
+                // remove classes from all
+                $(".adminMenu").removeClass("active");
+                // add class to the one we clicked
+                $(this).addClass("active");
+            });
+
+            $('#tblCompanyProfile').DataTable({
+                paging: true,
+                scrollY: 300
+            });
+        });
+    </script>
+
+    }
+
+@*
+@await RenderSectionAsync("Scripts", required: false)
+*@
+
+

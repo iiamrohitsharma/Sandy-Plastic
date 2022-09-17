@@ -1,0 +1,54 @@
+﻿@using Sandy.Main.Models
+
+@model RecruiterProfilesViewModel
+
+@{
+    ViewData["Title"] = "Recruiter";
+    ViewData["Heading"] = "Add recruiter details";
+}
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model=>model.ID)
+
+    <div class="card card-header">
+        <small>
+            Recruiter details will get save into the system
+        </small>
+    </div>
+    <div class="card card-body">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model=>model.FirstName, new { htmlAttributes = new { @class = "form-control" }})
+                @Html.EditorFor(model=>model.FirstName,new { htmlAttributes = new { @class = "form-control", placeholder = "First Name"  } })
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model=>model.LastName, new { htmlAttributes = new { @class = "form-control" }})
+                @Html.EditorFor(model=>model.LastName,new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name"  } })
+
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model=>model.MobileNumber, new { htmlAttributes = new { @class = "form-control" }})
+                @Html.EditorFor(model=>model.MobileNumber,new { htmlAttributes = new { @class = "form-control", placeholder = "Mobile Name"  } })
+            </div>
+            <div class="form-group col-md-8">
+                @Html.LabelFor(model=>model.EmailID, new { htmlAttributes = new { @class = "form-control" }})
+                @Html.EditorFor(model=>model.EmailID,new { htmlAttributes = new { @class = "form-control", placeholder = "Email Name"  } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model=>model.SelectedCompanyID, new { htmlAttributes = new { @class = "form-control" }})
+            @*@Html.EditorFor(model=>model.CompanyName,new { htmlAttributes = new { @class = "form-control", placeholder = "Company Name"  } })*@
+            @Html.DropDownListFor(model=>model.SelectedCompanyID, Model.Companies,"--Select--",  new { @class = "form-control"})
+        </div>     
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-primary default-button-size">Save</button>
+        <button type="button" class="btn btn-secondary default-button-size">Cancel</button>
+    </div>
+
+}
+
