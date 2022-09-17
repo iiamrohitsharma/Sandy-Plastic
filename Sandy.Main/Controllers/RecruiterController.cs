@@ -78,7 +78,13 @@ namespace Sandy.Main.Controllers
         {
            return unitOfWork.CompanyProfileRepository
                 .GetAllAsync().Result
-                .Select(x => new SelectListItem() { Text = x.Name, Value = x.ID.ToString() }).ToList();
+                .Select(x => new SelectListItem() { Text = x.Name, Value = x.ID.ToString() })
+                .ToList();
+        }
+
+        public IActionResult SendRecruiterEmail() 
+        {
+            return View(new SendRecruiterEmailViewModel());
         }
     }
 }
